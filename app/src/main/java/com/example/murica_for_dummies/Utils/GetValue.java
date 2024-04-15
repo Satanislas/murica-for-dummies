@@ -4,6 +4,9 @@ public class GetValue {
 
     public static double convert(String value){
         try{
+            if (value.isEmpty()){
+                return 0;
+            }
             double res = Double.parseDouble(value);
             if (res < 0){
                 return Constants.ERROR_VALUE;
