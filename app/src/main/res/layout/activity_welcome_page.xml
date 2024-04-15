@@ -8,7 +8,7 @@
     tools:context=".WelcomePage">
 
     <TextView
-        android:id="@+id/CelsiusLabel"
+        android:id="@+id/Title"
         android:layout_width="265dp"
         android:layout_height="44dp"
         android:layout_marginTop="20dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/CelsiusHint"
+        android:id="@+id/UserConnected"
         android:layout_width="260dp"
         android:layout_height="44dp"
         android:layout_marginTop="40dp"
@@ -31,20 +31,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CelsiusLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/MassButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
         android:text="Mass"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/VolumeButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/VolumeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volume"
@@ -55,17 +55,17 @@
         app:layout_constraintVertical_bias="0.502" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/DistanceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:text="Distance"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/VolumeButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/HistoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="See History"

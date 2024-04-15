@@ -27,6 +27,7 @@ public class MassImperialToMetric extends AppCompatActivity {
     EditText TonValueText;
     TextView ResultText;
     Button ConvertButton;
+    Button HomeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,13 @@ public class MassImperialToMetric extends AppCompatActivity {
         //OunceValueText.setOnKeyListener(this::PressEnter); DISABLED BECAUSE USER PREFER TO SWITCH
         //PoundValueText.setOnKeyListener(this::PressEnter); TO THE TWO OTHER EDITTEXT
         TonValueText.setOnKeyListener(this::PressEnter);
+
+        //Click to come back
+        HomeButton.setOnClickListener(v -> HomeButtonCall());
+    }
+
+    private void HomeButtonCall() {
+        startActivity(WelcomePage.IntentFactory(getApplicationContext()));
     }
 
     private boolean PressEnter(View v, int keyCode, KeyEvent event) {
@@ -69,6 +77,7 @@ public class MassImperialToMetric extends AppCompatActivity {
         TonValueText = binding.EditValueTon;
         ResultText = binding.ResultText;
         ConvertButton = binding.ConvertButton;
+        HomeButton = binding.HomeButton;
     }
 
     private void ConvertButtonCall(){
@@ -114,4 +123,6 @@ public class MassImperialToMetric extends AppCompatActivity {
     public static Intent IntentFactory(Context context){
         return new Intent(context, MassImperialToMetric.class);
     }
+
+
 }

@@ -1,19 +1,57 @@
 package com.example.murica_for_dummies;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class WelcomePage extends AppCompatActivity {
+
+    com.example.murica_for_dummies.databinding.ActivityWelcomePageBinding binding;
+
+    Button MassButton;
+    Button VolumeButton;
+    Button DistanceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //TODO
+        binding = com.example.murica_for_dummies.databinding.ActivityWelcomePageBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+
+        setContentView(view);
+
+        InitAttributes();
+
+        MassButton.setOnClickListener(v -> MassButtonCall());
+        VolumeButton.setOnClickListener(v -> VolumeButtonCall());
+        DistanceButton.setOnClickListener(v -> DistanceButtonCall());
+    }
+
+    private void DistanceButtonCall() {
+        Toast.makeText(getApplicationContext(),"Distance Activity Here", Toast.LENGTH_SHORT).show();
+    }
+
+    private void VolumeButtonCall() {
+        Toast.makeText(getApplicationContext(),"Volume Activity Here", Toast.LENGTH_SHORT).show();
+    }
+
+    private void MassButtonCall() {
+        startActivity(MassImperialToMetric.IntentFactory(getApplicationContext()));
+    }
+
+    private void InitAttributes() {
+        MassButton = binding.MassButton;
+        VolumeButton = binding.VolumeButton;
+        DistanceButton = binding.DistanceButton;
+    }
+
+    public static Intent IntentFactory(Context context){
+        return new Intent(context, WelcomePage.class);
     }
 }

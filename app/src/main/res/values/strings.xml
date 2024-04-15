@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Murica_for_dummies</string>
 
-    <string name="MassMetricResult">Result : %1$.2f kg</string>
+    <string name="MassMetricResult">Result : %1$.3f kg</string>
 </resources>

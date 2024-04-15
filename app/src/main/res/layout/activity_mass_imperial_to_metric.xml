@@ -136,9 +136,23 @@
 
     <Button
         android:id="@+id/SwapConverter"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:text="👈👉"
+        android:layout_width="82dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        app:icon="@android:drawable/ic_popup_sync"
+        app:iconSize="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/HomeButton"
+        android:layout_width="82dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:icon="@android:drawable/stat_notify_more"
+        app:iconSize="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
