@@ -1,12 +1,17 @@
 package com.example.murica_for_dummies;
 
+import android.accessibilityservice.AccessibilityService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.murica_for_dummies.Utils.Constants;
 import com.example.murica_for_dummies.Utils.GetValue;
@@ -34,7 +39,28 @@ public class MassImperialToMetric extends AppCompatActivity {
 
         InitAttributes();
 
+        //Click to convert
         ConvertButton.setOnClickListener(v -> ConvertButtonCall());
+
+        //Press enter to convert
+        //OunceValueText.setOnKeyListener(this::PressEnter); DISABLED BECAUSE USER PREFER TO SWITCH
+        //PoundValueText.setOnKeyListener(this::PressEnter); TO THE TWO OTHER EDITTEXT
+        TonValueText.setOnKeyListener(this::PressEnter);
+    }
+
+    private boolean PressEnter(View v, int keyCode, KeyEvent event) {
+        // If the event is a key-down event on the "enter" button
+        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                (keyCode == KeyEvent.KEYCODE_ENTER)) {
+            // Perform action on key press
+            ConvertButtonCall();
+
+            //hides the keyboard
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            return true;
+        }
+        return false;
     }
 
     private void InitAttributes(){
