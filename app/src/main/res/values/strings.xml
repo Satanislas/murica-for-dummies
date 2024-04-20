@@ -2,4 +2,7 @@
     <string name="app_name">Murica_for_dummies</string>
 
     <string name="MassMetricResult">Result : %1$.3f kg</string>
+    <string name="MassOunceResult">Result : %1$.3f Ounce</string>
+    <string name="MassPoundResult">Result : %1$.3f Pound</string>
+    <string name="MassTonResult">Result : %1$.3f Ton</string>
 </resources>
