@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Murica_for_dummies"
         tools:targetApi="31">
         <activity
+            android:name=".VolumeMetricToImperial"
+            android:exported="false" />
+        <activity
+            android:name=".VolumeImperialToMetric"
+            android:exported="false" />
+        <activity
+            android:name=".DistanceMetricToImperial"
+            android:exported="false" />
+        <activity
+            android:name=".DistanceImperialToMetric"
+            android:exported="false" />
+        <activity
             android:name=".MassMetricToImperial"
             android:exported="false" />
         <activity
