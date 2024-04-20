@@ -1,4 +1,4 @@
-package com.example.murica_for_dummies;
+package com.example.murica_for_dummies.Mass;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,16 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
 import com.example.murica_for_dummies.Utils.GetValue;
 import com.example.murica_for_dummies.Utils.MassConverters;
-import com.example.murica_for_dummies.databinding.ActivityMassImperialToMetricBinding;
+import com.example.murica_for_dummies.WelcomePage;
 import com.example.murica_for_dummies.databinding.ActivityMassMetricToImperialBinding;
 
 public class MassMetricToImperial extends AppCompatActivity {

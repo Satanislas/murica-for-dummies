@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.Mass.MassImperialToMetric;
+
 public class WelcomePage extends AppCompatActivity {
 
     com.example.murica_for_dummies.databinding.ActivityWelcomePageBinding binding;
