@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.murica_for_dummies.Mass.MassImperialToMetric;
+import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
 
 public class WelcomePage extends AppCompatActivity {
 
@@ -40,7 +41,7 @@ public class WelcomePage extends AppCompatActivity {
     }
 
     private void VolumeButtonCall() {
-        Toast.makeText(getApplicationContext(),"Volume Activity Here", Toast.LENGTH_SHORT).show();
+        startActivity(VolumeImperialToMetric.IntentFactory(getApplicationContext()));
     }
 
     private void MassButtonCall() {
