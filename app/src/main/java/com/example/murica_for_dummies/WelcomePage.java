@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.Distance.DistanceImperialToMetric;
 import com.example.murica_for_dummies.Mass.MassImperialToMetric;
 import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
 
@@ -37,7 +38,7 @@ public class WelcomePage extends AppCompatActivity {
     }
 
     private void DistanceButtonCall() {
-        Toast.makeText(getApplicationContext(),"Distance Activity Here", Toast.LENGTH_SHORT).show();
+       startActivity(DistanceImperialToMetric.IntentFactory(getApplicationContext()));
     }
 
     private void VolumeButtonCall() {

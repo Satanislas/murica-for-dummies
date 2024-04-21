@@ -7,4 +7,153 @@
     android:layout_height="match_parent"
     tools:context=".Distance.DistanceImperialToMetric">
 
+    <TextView
+        android:id="@+id/Type3Text"
+        android:layout_width="127dp"
+        android:layout_height="31dp"
+        android:text="Mile"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/EditValueTon"
+        app:layout_constraintStart_toEndOf="@+id/EditValueTon"
+        app:layout_constraintTop_toTopOf="@+id/EditValueTon" />
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="228dp"
+        android:layout_height="39dp"
+        android:text="Distance Converter"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
+
+    <EditText
+        android:id="@+id/EditValueOunce"
+        android:layout_width="86dp"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="numberDecimal"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.217" />
+
+    <EditText
+        android:id="@+id/EditValuePound"
+        android:layout_width="86dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="numberDecimal"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditValueOunce"
+        app:layout_constraintVertical_bias="0.088" />
+
+    <EditText
+        android:id="@+id/EditValueTon"
+        android:layout_width="86dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="numberDecimal"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditValuePound"
+        app:layout_constraintVertical_bias="0.108" />
+
+    <TextView
+        android:id="@+id/Type1Text"
+        android:layout_width="128dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="4dp"
+        android:text="Inch"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/EditValueOunce"
+        app:layout_constraintStart_toEndOf="@+id/EditValueOunce"
+        app:layout_constraintTop_toTopOf="@+id/EditValueOunce"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/Type2Text"
+        android:layout_width="118dp"
+        android:layout_height="35dp"
+        android:text="Feet"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/EditValuePound"
+        app:layout_constraintStart_toEndOf="@+id/EditValuePound"
+        app:layout_constraintTop_toTopOf="@+id/EditValuePound" />
+
+    <TextView
+        android:id="@+id/ResultText"
+        android:layout_width="403dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="24dp"
+        android:text="Result : 0 m"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="@+id/ConvertButton"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/ConvertButton"
+        app:layout_constraintTop_toBottomOf="@+id/ConvertButton" />
+
+    <Button
+        android:id="@+id/ConvertButton"
+        android:layout_width="138dp"
+        android:layout_height="68dp"
+        android:text="Convert"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.688" />
+
+    <TextView
+        android:id="@+id/SubTitle"
+        android:layout_width="189dp"
+        android:layout_height="23dp"
+        android:text="Imperial to Metric"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/Title"
+        app:layout_constraintStart_toStartOf="@+id/Title"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+    <Button
+        android:id="@+id/SwapConverter"
+        android:layout_width="82dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        app:icon="@android:drawable/ic_popup_sync"
+        app:iconSize="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/HomeButton"
+        android:layout_width="82dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:icon="@android:drawable/stat_notify_more"
+        app:iconSize="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
