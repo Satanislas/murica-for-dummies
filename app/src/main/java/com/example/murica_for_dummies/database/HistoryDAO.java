@@ -16,6 +16,6 @@ public interface HistoryDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertHistory(History history);
 
-    @Query("SELECT * FROM " )
+    @Query("SELECT * FROM historyTable")
     LiveData<List<History>> getAllHistory();
 }

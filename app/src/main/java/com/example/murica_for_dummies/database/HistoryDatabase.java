@@ -23,10 +23,8 @@ public abstract class HistoryDatabase extends RoomDatabase {
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     private static final String DATABASE_NAME = "history_database";
-    private static String HISTORY_TABLE = "historyTable";
 
-    static HistoryDatabase getDatabase(final Context context, String tableName) {
-        HISTORY_TABLE = tableName;
+    static HistoryDatabase getDatabase(final Context context, final String tableName) {
         if (INSTANCE == null) {
             synchronized (HistoryDatabase.class) {
                 if (INSTANCE == null) {

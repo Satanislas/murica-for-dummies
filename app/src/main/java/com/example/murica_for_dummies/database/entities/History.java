@@ -3,21 +3,14 @@ package com.example.murica_for_dummies.database.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.murica_for_dummies.database.UsersDatabase;
-
-import java.time.LocalDateTime;
-
-@Entity(tableName = UsersDatabase.USERS_TABLE)
+@Entity(tableName = "historyTable")
 public class History {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String savedUserLogin;
-
-    private String unit1Name; //used as a username
-
+    private String unit1Name;
     private String unit2Name;
-
     private double value;
 
     public History(String savedUserLogin, String unit1Name, String unit2Name, double value) {
