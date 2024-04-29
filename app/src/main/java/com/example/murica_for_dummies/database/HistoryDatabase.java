@@ -2,9 +2,11 @@ package com.example.murica_for_dummies.database;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.murica_for_dummies.database.entities.History;
 
@@ -20,17 +22,33 @@ public abstract class HistoryDatabase extends RoomDatabase {
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static HistoryDatabase getDatabase(final Context context) {
+    private static final String DATABASE_NAME = "history_database";
+    private static String HISTORY_TABLE = "historyTable";
+
+    static HistoryDatabase getDatabase(final Context context, String tableName) {
+        HISTORY_TABLE = tableName;
         if (INSTANCE == null) {
             synchronized (HistoryDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    HistoryDatabase.class, "history_database")
+                                    HistoryDatabase.class, DATABASE_NAME)
                             .fallbackToDestructiveMigration()
+                            .addCallback(addDefaultValues)
                             .build();
                 }
             }
         }
         return INSTANCE;
     }
+
+    private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            databaseWriteExecutor.execute(() -> {
+                HistoryDAO dao = INSTANCE.historyDAO();
+                // Ajoutez ici le code pour insérer des valeurs par défaut dans la table d'historique (si nécessaire)
+            });
+        }
+    };
 }
