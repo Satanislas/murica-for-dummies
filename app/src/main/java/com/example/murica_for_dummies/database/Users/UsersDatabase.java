@@ -1,4 +1,4 @@
-package com.example.murica_for_dummies.database;
+package com.example.murica_for_dummies.database.Users;
 
 import android.content.Context;
 

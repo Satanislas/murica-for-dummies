@@ -1,4 +1,4 @@
-package com.example.murica_for_dummies.database;
+package com.example.murica_for_dummies.database.History;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

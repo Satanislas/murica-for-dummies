@@ -1,4 +1,4 @@
-package com.example.murica_for_dummies.database;
+package com.example.murica_for_dummies.database.Users;
 
 import android.app.Application;
 
@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData;
 
 import com.example.murica_for_dummies.database.entities.Users;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

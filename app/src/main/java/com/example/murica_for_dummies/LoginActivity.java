@@ -1,6 +1,5 @@
 package com.example.murica_for_dummies;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import com.example.murica_for_dummies.database.UsersRepository;
+import com.example.murica_for_dummies.database.Users.UsersRepository;
 import com.example.murica_for_dummies.database.entities.Users;
 import com.example.murica_for_dummies.databinding.ActivityLoginBinding;
 

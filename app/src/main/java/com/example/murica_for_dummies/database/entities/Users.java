@@ -3,7 +3,7 @@ package com.example.murica_for_dummies.database.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.murica_for_dummies.database.UsersDatabase;
+import com.example.murica_for_dummies.database.Users.UsersDatabase;
 
 import java.time.LocalDateTime;
 
