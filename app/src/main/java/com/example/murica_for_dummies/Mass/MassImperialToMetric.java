@@ -12,11 +12,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.MainActivity;
 import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
 import com.example.murica_for_dummies.Utils.GetValue;
 import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.WelcomePage;
+import com.example.murica_for_dummies.database.History.HistoryRepository;
+import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityMassImperialToMetricBinding;
 
 public class MassImperialToMetric extends AppCompatActivity {
@@ -127,6 +130,10 @@ public class MassImperialToMetric extends AppCompatActivity {
 
         //result print
         ResultText.setText(getString(R.string.MassMetricResult,result));
+
+        //database history add
+        History histo = new History(MainActivity.user.getLogin(),"Mass","kg",result);
+        HistoryRepository.getRepository(getApplication(),"historyTable").insertHistory(histo);
     }
 
     public static Intent IntentFactory(Context context){

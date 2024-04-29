@@ -28,6 +28,7 @@ public class WelcomePage extends AppCompatActivity {
         Button MassButton;
         Button VolumeButton;
         Button DistanceButton;
+        Button HistoryButton;
 
         static boolean isAdmin = true;
 
@@ -54,6 +55,7 @@ public class WelcomePage extends AppCompatActivity {
             MassButton.setOnClickListener(v -> MassButtonCall());
             VolumeButton.setOnClickListener(v -> VolumeButtonCall());
             DistanceButton.setOnClickListener(v -> DistanceButtonCall());
+            HistoryButton.setOnClickListener(v -> startActivity(HistoryActivity.IntentFactory(getApplicationContext())));
 
             Button logoutButton = findViewById(R.id.logoutButton);
 
@@ -95,6 +97,7 @@ public class WelcomePage extends AppCompatActivity {
             MassButton = binding.MassButton;
             VolumeButton = binding.VolumeButton;
             DistanceButton = binding.DistanceButton;
+            HistoryButton = binding.HistoryButton;
         }
 
         public static Intent IntentFactory(Context context){

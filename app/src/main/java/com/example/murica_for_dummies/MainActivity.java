@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         });
          */
 
-        startActivity(WelcomePage.IntentFactory(getApplicationContext()));   //STAN
-        //startActivity(LoginActivity.loginIntentFactory(getApplicationContext())); //RAYAN
+        //startActivity(WelcomePage.IntentFactory(getApplicationContext()));   //STAN
+        startActivity(LoginActivity.loginIntentFactory(getApplicationContext())); //RAYAN
     }
 
     private void loginUser() {

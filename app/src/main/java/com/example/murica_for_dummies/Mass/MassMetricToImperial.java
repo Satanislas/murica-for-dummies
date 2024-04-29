@@ -12,11 +12,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.MainActivity;
 import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
 import com.example.murica_for_dummies.Utils.GetValue;
 import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.WelcomePage;
+import com.example.murica_for_dummies.database.History.HistoryRepository;
+import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityMassMetricToImperialBinding;
 
 public class MassMetricToImperial extends AppCompatActivity {
@@ -134,6 +137,17 @@ public class MassMetricToImperial extends AppCompatActivity {
         ResultTextOunce.setText(getString(R.string.MassOunceResult,resultOunce));
         ResultTextPound.setText(getString(R.string.MassPoundResult,resultPound));
         ResultTextTon.setText(getString(R.string.MassTonResult,resultTon));
+
+        //adding history to database
+        History histoOunce = new History(MainActivity.user.getLogin(),"Mass","Ounce",resultOunce);
+        History histoPound = new History(MainActivity.user.getLogin(),"Mass","Pound",resultPound);
+        History histoTon = new History(MainActivity.user.getLogin(),"Mass","Ton",resultTon);
+
+        HistoryRepository repo = HistoryRepository.getRepository(getApplication(),"historyTable");
+
+        repo.insertHistory(histoOunce);
+        repo.insertHistory(histoPound);
+        repo.insertHistory(histoTon);
     }
 
     public static Intent IntentFactory(Context context){
