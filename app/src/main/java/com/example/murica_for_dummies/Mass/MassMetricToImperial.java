@@ -1,6 +1,5 @@
-package com.example.murica_for_dummies;
+package com.example.murica_for_dummies.Mass;
 
-import android.accessibilityservice.AccessibilityService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,30 +9,36 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
 import com.example.murica_for_dummies.Utils.GetValue;
 import com.example.murica_for_dummies.Utils.MassConverters;
-import com.example.murica_for_dummies.databinding.ActivityMassImperialToMetricBinding;
+import com.example.murica_for_dummies.WelcomePage;
+import com.example.murica_for_dummies.databinding.ActivityMassMetricToImperialBinding;
 
-public class MassImperialToMetric extends AppCompatActivity {
+public class MassMetricToImperial extends AppCompatActivity {
 
-    ActivityMassImperialToMetricBinding binding;
 
-    EditText OunceValueText;
-    EditText PoundValueText;
+    ActivityMassMetricToImperialBinding binding;
+
+    EditText GramValueText;
+    EditText KiloValueText;
     EditText TonValueText;
-    TextView ResultText;
+    TextView ResultTextOunce;
+    TextView ResultTextPound;
+    TextView ResultTextTon;
     Button ConvertButton;
     Button HomeButton;
+    Button SwapButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMassImperialToMetricBinding.inflate(getLayoutInflater());
+        binding = ActivityMassMetricToImperialBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
         setContentView(view);
@@ -44,12 +49,18 @@ public class MassImperialToMetric extends AppCompatActivity {
         ConvertButton.setOnClickListener(v -> ConvertButtonCall());
 
         //Press enter to convert
-        //OunceValueText.setOnKeyListener(this::PressEnter); DISABLED BECAUSE USER PREFER TO SWITCH
-        //PoundValueText.setOnKeyListener(this::PressEnter); TO THE TWO OTHER EDITTEXT
+        //GramValueText.setOnKeyListener(this::PressEnter); DISABLED BECAUSE USER PREFER TO SWITCH
+        //KiloValueText.setOnKeyListener(this::PressEnter); TO THE TWO OTHER EDITTEXT
         TonValueText.setOnKeyListener(this::PressEnter);
 
         //Click to come back
         HomeButton.setOnClickListener(v -> HomeButtonCall());
+        //Click to swap
+        SwapButton.setOnClickListener(v -> SwapButtonCall());
+    }
+
+    private void SwapButtonCall() {
+        startActivity(MassImperialToMetric.IntentFactory(getApplicationContext()));
     }
 
     private void HomeButtonCall() {
@@ -72,34 +83,37 @@ public class MassImperialToMetric extends AppCompatActivity {
     }
 
     private void InitAttributes(){
-        OunceValueText = binding.EditValueOunce;
-        PoundValueText = binding.EditValuePound;
+        GramValueText = binding.EditValueGram;
+        KiloValueText = binding.EditValueKilo;
         TonValueText = binding.EditValueTon;
-        ResultText = binding.ResultText;
+        ResultTextOunce = binding.ResultTextOunce;
+        ResultTextPound = binding.ResultTextPound;
+        ResultTextTon = binding.ResultTextTon;
         ConvertButton = binding.ConvertButton;
         HomeButton = binding.HomeButton;
+        SwapButton = binding.SwapConverter;
     }
 
     private void ConvertButtonCall(){
         //setup
-        String OunceValueString = OunceValueText.getText().toString();
-        String PoundValueString = PoundValueText.getText().toString();
+        String GramValueString = GramValueText.getText().toString();
+        String KiloValueString = KiloValueText.getText().toString();
         String TonValueString = TonValueText.getText().toString();
 
-        double OunceValue = GetValue.convert(OunceValueString);
-        double PoundValue = GetValue.convert(PoundValueString);
+        double GramValue = GetValue.convert(GramValueString);
+        double KiloValue = GetValue.convert(KiloValueString);
         double TonValue = GetValue.convert(TonValueString);
 
         //error checks
         {
             boolean error = false;
-            if (OunceValue == Constants.ERROR_VALUE) {
+            if (GramValue == Constants.ERROR_VALUE) {
                 error = true;
-                OunceValueText.setText(Constants.ERROR_TEXT);
+                GramValueText.setText(Constants.ERROR_TEXT);
             }
-            if (PoundValue == Constants.ERROR_VALUE) {
+            if (KiloValue == Constants.ERROR_VALUE) {
                 error = true;
-                PoundValueText.setText(Constants.ERROR_TEXT);
+                KiloValueText.setText(Constants.ERROR_TEXT);
             }
             if (TonValue == Constants.ERROR_VALUE) {
                 error = true;
@@ -111,17 +125,19 @@ public class MassImperialToMetric extends AppCompatActivity {
         }
 
         //result compute
-        double result = 0;
-        result += MassConverters.ounceToKilograms(OunceValue);
-        result += MassConverters.poundToKilograms(PoundValue);
-        result += MassConverters.tonToKilograms(TonValue);
+        double kilo = GramValue / 1000 + KiloValue + TonValue * 1000;
+        double resultOunce = MassConverters.kilogramToOunce(kilo);
+        double resultPound = MassConverters.kilogramToPounds(kilo);
+        double resultTon = MassConverters.kilogramToTon(kilo);
 
         //result print
-        ResultText.setText(getString(R.string.MassMetricResult,result));
+        ResultTextOunce.setText(getString(R.string.MassOunceResult,resultOunce));
+        ResultTextPound.setText(getString(R.string.MassPoundResult,resultPound));
+        ResultTextTon.setText(getString(R.string.MassTonResult,resultTon));
     }
 
     public static Intent IntentFactory(Context context){
-        return new Intent(context, MassImperialToMetric.class);
+        return new Intent(context, MassMetricToImperial.class);
     }
 
 

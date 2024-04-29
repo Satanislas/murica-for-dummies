@@ -5,13 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Mass.MassImperialToMetric">
+    tools:context=".Mass.MassMetricToImperial">
 
     <TextView
         android:id="@+id/Type3Text"
         android:layout_width="127dp"
         android:layout_height="31dp"
-        android:text="Ton"
+        android:text="ton"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/EditValueTon"
         app:layout_constraintStart_toEndOf="@+id/EditValueTon"
@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.025" />
 
     <EditText
-        android:id="@+id/EditValueOunce"
+        android:id="@+id/EditValueGram"
         android:layout_width="86dp"
         android:layout_height="60dp"
         android:ems="10"
@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.217" />
 
     <EditText
-        android:id="@+id/EditValuePound"
+        android:id="@+id/EditValueKilo"
         android:layout_width="86dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditValueOunce"
+        app:layout_constraintTop_toBottomOf="@+id/EditValueGram"
         app:layout_constraintVertical_bias="0.088" />
 
     <EditText
@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditValuePound"
+        app:layout_constraintTop_toBottomOf="@+id/EditValueKilo"
         app:layout_constraintVertical_bias="0.108" />
 
     <TextView
@@ -83,29 +83,55 @@
         android:layout_width="128dp"
         android:layout_height="46dp"
         android:layout_marginStart="4dp"
-        android:text="Ounce"
+        android:text="g"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/EditValueOunce"
-        app:layout_constraintStart_toEndOf="@+id/EditValueOunce"
-        app:layout_constraintTop_toTopOf="@+id/EditValueOunce"
+        app:layout_constraintBottom_toBottomOf="@+id/EditValueGram"
+        app:layout_constraintStart_toEndOf="@+id/EditValueGram"
+        app:layout_constraintTop_toTopOf="@+id/EditValueGram"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/Type2Text"
         android:layout_width="118dp"
         android:layout_height="35dp"
-        android:text="Pound"
+        android:text="kg"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/EditValuePound"
-        app:layout_constraintStart_toEndOf="@+id/EditValuePound"
-        app:layout_constraintTop_toTopOf="@+id/EditValuePound" />
+        app:layout_constraintBottom_toBottomOf="@+id/EditValueKilo"
+        app:layout_constraintStart_toEndOf="@+id/EditValueKilo"
+        app:layout_constraintTop_toTopOf="@+id/EditValueKilo" />
 
     <TextView
-        android:id="@+id/ResultText"
+        android:id="@+id/ResultTextOunce"
         android:layout_width="403dp"
-        android:layout_height="91dp"
+        android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:text="Result : 0 kg"
+        android:text="Result : 0 Ounce"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="@+id/ConvertButton"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/ConvertButton"
+        app:layout_constraintTop_toBottomOf="@+id/ConvertButton" />
+
+    <TextView
+        android:id="@+id/ResultTextPound"
+        android:layout_width="403dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="84dp"
+        android:text="Result : 0 Pound"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="@+id/ConvertButton"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/ConvertButton"
+        app:layout_constraintTop_toBottomOf="@+id/ConvertButton" />
+
+    <TextView
+        android:id="@+id/ResultTextTon"
+        android:layout_width="403dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="144dp"
+        android:text="Result : 0 Ton"
         android:textAlignment="center"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="@+id/ConvertButton"
@@ -128,7 +154,7 @@
         android:id="@+id/SubTitle"
         android:layout_width="189dp"
         android:layout_height="23dp"
-        android:text="Imperial to Metric"
+        android:text="Metric to Imperial"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/Title"
         app:layout_constraintStart_toStartOf="@+id/Title"

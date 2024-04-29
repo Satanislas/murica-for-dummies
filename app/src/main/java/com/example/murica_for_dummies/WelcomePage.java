@@ -15,10 +15,13 @@
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.AlertDialog;
     import androidx.appcompat.app.AppCompatActivity;
-
     import com.example.murica_for_dummies.database.entities.Users;
+import com.example.murica_for_dummies.Distance.DistanceImperialToMetric;
+import com.example.murica_for_dummies.Mass.MassImperialToMetric;
+import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
 
-    public class WelcomePage extends AppCompatActivity {
+
+public class WelcomePage extends AppCompatActivity {
 
         com.example.murica_for_dummies.databinding.ActivityWelcomePageBinding binding;
 
@@ -37,13 +40,13 @@
 
         public final String SHARED_PREFERENCE_USERID_KEY = "com.example.murica_for_dummies.SHARED_PREFERENCE_USERID_KEY";
 
-        @Override
+  
+  @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
             binding = com.example.murica_for_dummies.databinding.ActivityWelcomePageBinding.inflate(getLayoutInflater());
             View view = binding.getRoot();
-
             setContentView(view);
 
             InitAttributes();
@@ -76,13 +79,13 @@
             }
         }
 
-        private void DistanceButtonCall() {
-            Toast.makeText(getApplicationContext(),"Distance Activity Here", Toast.LENGTH_SHORT).show();
-        }
+         private void DistanceButtonCall() {
+       startActivity(DistanceImperialToMetric.IntentFactory(getApplicationContext()));
+    }
 
-        private void VolumeButtonCall() {
-            Toast.makeText(getApplicationContext(),"Volume Activity Here", Toast.LENGTH_SHORT).show();
-        }
+    private void VolumeButtonCall() {
+        startActivity(VolumeImperialToMetric.IntentFactory(getApplicationContext()));
+    }
 
         private void MassButtonCall() {
             startActivity(MassImperialToMetric.IntentFactory(getApplicationContext()));

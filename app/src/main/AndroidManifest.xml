@@ -16,6 +16,21 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".Volume.VolumeMetricToImperial"
+            android:exported="false" />
+        <activity
+            android:name=".Volume.VolumeImperialToMetric"
+            android:exported="false" />
+        <activity
+            android:name=".Distance.DistanceMetricToImperial"
+            android:exported="false" />
+        <activity
+            android:name=".Distance.DistanceImperialToMetric"
+            android:exported="false" />
+        <activity
+            android:name=".Mass.MassMetricToImperial"
+            android:exported="false" />
+        <activity
             android:name=".MassImperialToMetric"
             android:exported="false" />
         <activity
