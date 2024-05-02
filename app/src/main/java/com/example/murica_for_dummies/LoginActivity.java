@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
 
     private UsersRepository repository;
-
+    public static String actualUsername;
 
 
     @Override
@@ -34,6 +34,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 verifyUser();
+            }
+        });
+
+        binding.createAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(CreateAccount.createAccountIntentFactory(getApplicationContext()));
             }
         });
     }
@@ -55,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     sharedPrefEditor.putInt(MainActivity.SHARED_PREFERENCE_USERID_KEY, user.getId());
                     sharedPrefEditor.apply();
                     WelcomePage.isAdmin = user.isAdmin();
+                    actualUsername = user.getLogin();
                     startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
 
                 }else

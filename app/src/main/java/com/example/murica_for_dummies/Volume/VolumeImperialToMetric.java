@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.MainActivity;
 import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
 import com.example.murica_for_dummies.Utils.GetValue;
@@ -19,6 +20,8 @@ import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.Utils.VolumeConverters;
 import com.example.murica_for_dummies.Volume.VolumeMetricToImperial;
 import com.example.murica_for_dummies.WelcomePage;
+import com.example.murica_for_dummies.database.Users.UsersRepository;
+import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityMassImperialToMetricBinding;
 import com.example.murica_for_dummies.databinding.ActivityVolumeImperialToMetricBinding;
 
@@ -34,12 +37,16 @@ public class VolumeImperialToMetric extends AppCompatActivity {
     Button HomeButton;
     Button SwapButton;
 
+    private UsersRepository repository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityVolumeImperialToMetricBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+
+        //repository = UsersRepository.getRepository(getApplication());
 
         setContentView(view);
 
@@ -130,6 +137,10 @@ public class VolumeImperialToMetric extends AppCompatActivity {
 
         //result print
         ResultText.setText(getString(R.string.VolumeMetricResult,result));
+
+//        History historyEntry = new History(MainActivity.user.getLogin(), "Mass", "KG", result);
+//
+//        repository.insertHistory(historyEntry);
     }
 
     public static Intent IntentFactory(Context context){

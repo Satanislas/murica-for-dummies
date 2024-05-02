@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 
 import com.example.murica_for_dummies.database.Users.UsersRepository;
+import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.database.entities.Users;
 
 public class MainActivity extends AppCompatActivity {
@@ -108,5 +109,12 @@ public class MainActivity extends AppCompatActivity {
 
         Users testUser1 = new Users("testuser1", "testuser1", false);
         repository.insertUser(testUser1);
+
+
+        History history = new History("admin1", "unit1", "unit2", 2);
+        repository.insertHistory(history);
+
+        history = new History("testuser1", "gyat", "suppakippa", 45);
+        repository.insertHistory(history);
     }
 }
