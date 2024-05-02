@@ -10,9 +10,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.MainActivity;
 import com.example.murica_for_dummies.Mass.MassImperialToMetric;
 import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
@@ -21,6 +23,8 @@ import com.example.murica_for_dummies.Utils.GetValue;
 import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.Utils.VolumeConverters;
 import com.example.murica_for_dummies.WelcomePage;
+import com.example.murica_for_dummies.database.History.HistoryRepository;
+import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityMassMetricToImperialBinding;
 import com.example.murica_for_dummies.databinding.ActivityVolumeMetricToImperialBinding;
 
@@ -138,6 +142,22 @@ public class DistanceMetricToImperial extends AppCompatActivity {
         ResultTextOunce.setText(getString(R.string.DistanceInchResult,resultOunce));
         ResultTextPound.setText(getString(R.string.DistanceFeetResult,resultPound));
         ResultTextTon.setText(getString(R.string.DistanceMileResult,resultTon));
+
+
+        try {
+            History histoOunce = new History(MainActivity.user.getLogin(), "Distance", "Inch", resultOunce);
+            History histoPound = new History(MainActivity.user.getLogin(), "Distance", "Feet", resultPound);
+            History histoTon = new History(MainActivity.user.getLogin(), "Distance", "Mile", resultTon);
+
+            HistoryRepository repo = HistoryRepository.getRepository(getApplication(), "historyTable");
+
+            repo.insertHistory(histoOunce);
+            repo.insertHistory(histoPound);
+            repo.insertHistory(histoTon);
+        }
+        catch(Exception e){
+            Toast.makeText(this, "Couldn't save history : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static Intent IntentFactory(Context applicationContext) {

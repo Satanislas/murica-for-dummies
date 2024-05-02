@@ -9,9 +9,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.MainActivity;
 import com.example.murica_for_dummies.Mass.MassImperialToMetric;
 import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
@@ -19,6 +21,8 @@ import com.example.murica_for_dummies.Utils.GetValue;
 import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.Utils.VolumeConverters;
 import com.example.murica_for_dummies.WelcomePage;
+import com.example.murica_for_dummies.database.History.HistoryRepository;
+import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityMassMetricToImperialBinding;
 import com.example.murica_for_dummies.databinding.ActivityVolumeMetricToImperialBinding;
 
@@ -136,6 +140,21 @@ public class VolumeMetricToImperial extends AppCompatActivity {
         ResultTextOunce.setText(getString(R.string.VolumeGillResult,resultOunce));
         ResultTextPound.setText(getString(R.string.VolumePintResult,resultPound));
         ResultTextTon.setText(getString(R.string.VolumeGallonResult,resultTon));
+
+        try {
+            History histoOunce = new History(MainActivity.user.getLogin(), "Volume", "Gill", resultOunce);
+            History histoPound = new History(MainActivity.user.getLogin(), "Volume", "Pint", resultPound);
+            History histoTon = new History(MainActivity.user.getLogin(), "Volume", "Gallon", resultTon);
+
+            HistoryRepository repo = HistoryRepository.getRepository(getApplication(), "historyTable");
+
+            repo.insertHistory(histoOunce);
+            repo.insertHistory(histoPound);
+            repo.insertHistory(histoTon);
+        }
+        catch(Exception e){
+            Toast.makeText(this, "Couldn't save history : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static Intent IntentFactory(Context context){

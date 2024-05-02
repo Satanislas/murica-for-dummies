@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -139,15 +140,21 @@ public class MassMetricToImperial extends AppCompatActivity {
         ResultTextTon.setText(getString(R.string.MassTonResult,resultTon));
 
         //adding history to database
-        History histoOunce = new History(MainActivity.user.getLogin(),"Mass","Ounce",resultOunce);
-        History histoPound = new History(MainActivity.user.getLogin(),"Mass","Pound",resultPound);
-        History histoTon = new History(MainActivity.user.getLogin(),"Mass","Ton",resultTon);
 
-        HistoryRepository repo = HistoryRepository.getRepository(getApplication(),"historyTable");
+        try {
+            History histoOunce = new History(MainActivity.user.getLogin(), "Mass", "Ounce", resultOunce);
+            History histoPound = new History(MainActivity.user.getLogin(), "Mass", "Pound", resultPound);
+            History histoTon = new History(MainActivity.user.getLogin(), "Mass", "Ton", resultTon);
 
-        repo.insertHistory(histoOunce);
-        repo.insertHistory(histoPound);
-        repo.insertHistory(histoTon);
+            HistoryRepository repo = HistoryRepository.getRepository(getApplication(), "historyTable");
+
+            repo.insertHistory(histoOunce);
+            repo.insertHistory(histoPound);
+            repo.insertHistory(histoTon);
+        }
+        catch(Exception e){
+            Toast.makeText(this, "Couldn't save history : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static Intent IntentFactory(Context context){

@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,8 @@ import com.example.murica_for_dummies.WelcomePage;
 import com.example.murica_for_dummies.database.History.HistoryRepository;
 import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityMassImperialToMetricBinding;
+
+import java.sql.SQLException;
 
 public class MassImperialToMetric extends AppCompatActivity {
 
@@ -132,8 +135,13 @@ public class MassImperialToMetric extends AppCompatActivity {
         ResultText.setText(getString(R.string.MassMetricResult,result));
 
         //database history add
-        History histo = new History(MainActivity.user.getLogin(),"Mass","kg",result);
-        HistoryRepository.getRepository(getApplication(),"historyTable").insertHistory(histo);
+        try{
+            History histo = new History(MainActivity.user.getLogin(), "Mass", "kg", result);
+            HistoryRepository.getRepository(getApplication(), "historyTable").insertHistory(histo);
+        }
+        catch(Exception e){
+            Toast.makeText(this, "Couldn't save in history : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public static Intent IntentFactory(Context context){
