@@ -9,6 +9,9 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.murica_for_dummies.database.History.HistoryDAO;
+import com.example.murica_for_dummies.database.Migrations;
+import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.database.entities.Users;
 import com.example.murica_for_dummies.database.typeConverters.LocalDateTypeConverter;
 
@@ -16,7 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {Users.class}, version = 1, exportSchema = false)
+@Database(entities = {Users.class, History.class}, version = 2, exportSchema = false)
 public abstract class UsersDatabase extends RoomDatabase {
 
     public static final String USERS_TABLE = "usersTable";
@@ -28,19 +31,29 @@ public abstract class UsersDatabase extends RoomDatabase {
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static UsersDatabase getDatabase(final Context context)
-    {
-        if(INSTANCE == null)
-        {
-            synchronized (UsersDatabase.class)
-            {
-                if(INSTANCE == null)
-                {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    UsersDatabase.class,DATABASE_NAME)
-                            .fallbackToDestructiveMigration().addCallback(addDefaultValues).build();
-                }
-            }
+//    static UsersDatabase getDatabase(final Context context)
+//    {
+//        if(INSTANCE == null)
+//        {
+//            synchronized (UsersDatabase.class)
+//            {
+//                if(INSTANCE == null)
+//                {
+//                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+//                                    UsersDatabase.class,DATABASE_NAME)
+//                            .fallbackToDestructiveMigration().addCallback(addDefaultValues).build();
+//                }
+//            }
+//        }
+//        return INSTANCE;
+//    }
+
+    public static synchronized UsersDatabase getDatabase(Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                            UsersDatabase.class, "my_database")
+                    .addMigrations(Migrations.MIGRATION_1_3)
+                    .build();
         }
         return INSTANCE;
     }
@@ -57,11 +70,17 @@ public abstract class UsersDatabase extends RoomDatabase {
 
                 Users testUser1 = new Users("testuser1", "testuser1", false);
                 dao.insert(testUser1);
+
+                HistoryDAO daoHisto = INSTANCE.historyDAO();
+
+
             });
         }
     };
 
     public abstract UsersDAO usersDAO();
+
+    public abstract HistoryDAO historyDAO();
 }
 
 

@@ -9,15 +9,12 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.murica_for_dummies.Misc.MyAdapter;
-import com.example.murica_for_dummies.database.History.HistoryRepository;
+import com.example.murica_for_dummies.database.Users.UsersRepository;
 import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityHistoryBinding;
 
@@ -30,6 +27,7 @@ public class HistoryActivity extends AppCompatActivity {
     Button HomeButton;
     Button ClearHistoryButton;
     RecyclerView recyclerView;
+    UsersRepository usersRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +38,9 @@ public class HistoryActivity extends AppCompatActivity {
         binding = ActivityHistoryBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+
+        usersRepository = UsersRepository.getRepository(getApplication());
 
         InitAttributes();
 
@@ -58,13 +59,16 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         //filling the recycler
-        LiveData<List<History>> res = HistoryRepository.getRepository(getApplication(),"historyTable").getAllHistory();
+        //List<History> list = usersRepository.getHistoryByUser(LoginActivity.actualUsername);
 
-        List<History> list = res.getValue();
         List<String> strList = new ArrayList<>();
-        for(History h : list){
-            strList.add(String.format(h.getUnit1Name() + " --> " + "%d.2" + " "  + h.getUnit2Name(),h.getValue() ));
+        //for(History h : list){
+            //strList.add(String.format(h.getUnit1Name() + " --> " + "%d.2" + " "  + h.getUnit2Name(),h.getValue() ));
+        //}
+        for (int i = 0; i < 20; i++) {
+            strList.add("caca " + i);
         }
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         MyAdapter adapter = new MyAdapter(strList, this);
         recyclerView.setAdapter(adapter);

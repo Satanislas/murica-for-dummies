@@ -10,17 +10,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.LoginActivity;
+import com.example.murica_for_dummies.LoginActivity;
 import com.example.murica_for_dummies.MainActivity;
 import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
 import com.example.murica_for_dummies.Utils.GetValue;
 import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.WelcomePage;
-import com.example.murica_for_dummies.database.History.HistoryRepository;
+import com.example.murica_for_dummies.database.Users.UsersRepository;
 import com.example.murica_for_dummies.database.entities.History;
+import com.example.murica_for_dummies.database.entities.Users;
 import com.example.murica_for_dummies.databinding.ActivityMassImperialToMetricBinding;
 
 import java.sql.SQLException;
@@ -37,14 +41,21 @@ public class MassImperialToMetric extends AppCompatActivity {
     Button HomeButton;
     Button SwapButton;
 
+    UsersRepository repository;
+
+    public static Users user;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMassImperialToMetricBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        repository = UsersRepository.getRepository(getApplication());
 
         setContentView(view);
+        user = MainActivity.user;
 
         InitAttributes();
 
@@ -136,12 +147,13 @@ public class MassImperialToMetric extends AppCompatActivity {
 
         //database history add
         try{
-            History histo = new History(MainActivity.user.getLogin(), "Mass", "kg", result);
-            HistoryRepository.getRepository(getApplication(), "historyTable").insertHistory(histo);
+            History historyEntry = new History(LoginActivity.actualUsername, "Mass", "kg", result);
+            repository.insertHistory(historyEntry);
         }
         catch(Exception e){
             Toast.makeText(this, "Couldn't save in history : " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
     }
 
     public static Intent IntentFactory(Context context){

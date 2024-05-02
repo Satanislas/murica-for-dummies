@@ -21,8 +21,6 @@ import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.Utils.VolumeConverters;
 import com.example.murica_for_dummies.Volume.VolumeMetricToImperial;
 import com.example.murica_for_dummies.WelcomePage;
-import com.example.murica_for_dummies.database.History.HistoryRepository;
-import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityMassImperialToMetricBinding;
 import com.example.murica_for_dummies.databinding.ActivityVolumeImperialToMetricBinding;
 
@@ -38,12 +36,16 @@ public class VolumeImperialToMetric extends AppCompatActivity {
     Button HomeButton;
     Button SwapButton;
 
+    private UsersRepository repository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityVolumeImperialToMetricBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+
+        //repository = UsersRepository.getRepository(getApplication());
 
         setContentView(view);
 

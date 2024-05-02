@@ -20,4 +20,9 @@
     <string name="DistanceInchResult">Result : %1$.3f Inch</string>
     <string name="DistanceFeetResult">Result : %1$.3f Feet</string>
     <string name="DistanceMileResult">Result : %1$.3f Mile</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_your_account">Create your Account</string>
+    <string name="create_account">MURICA FOR DUMMIES\nCreate your Account</string>
+    <string name="create_accountButton">Create Account</string>
+    <string name="create_accountSwapPageButton">Create Account</string>
 </resources>

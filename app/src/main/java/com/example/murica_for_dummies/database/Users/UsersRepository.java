@@ -4,6 +4,8 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.murica_for_dummies.database.History.HistoryDAO;
+import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.database.entities.Users;
 
 import java.util.List;
@@ -14,11 +16,13 @@ import java.util.concurrent.Future;
 public class UsersRepository {
     private static UsersRepository instance;
     private UsersDAO usersDAO;
+    private HistoryDAO historyDAO;
     private List<Users> allLogs;
 
     private UsersRepository(Application application) {
         UsersDatabase db = UsersDatabase.getDatabase(application);
         this.usersDAO = db.usersDAO();
+        this.historyDAO = db.historyDAO();
         this.allLogs = (List<Users>) this.usersDAO.getAllRecords();
     }
 
@@ -82,6 +86,8 @@ public class UsersRepository {
     public void deleteAllUsers() {
         UsersDatabase.databaseWriteExecutor.execute(() -> {
             usersDAO.deleteAll();
+
+
         });
     }
 
@@ -104,5 +110,15 @@ public class UsersRepository {
     public interface CreateUserCallback {
         void onUserCreated(Users user);
         void onUsernameExists();
+    }
+
+    public List<History> getHistoryByUser(String login) {
+        return getHistoryByUser(login);
+    }
+
+    public void insertHistory(History history) {
+        UsersDatabase.databaseWriteExecutor.execute(() -> {
+            historyDAO.insertHistory(history);
+        });
     }
 }
