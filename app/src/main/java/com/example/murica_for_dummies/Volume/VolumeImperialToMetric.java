@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.LoginActivity;
 import com.example.murica_for_dummies.MainActivity;
 import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
@@ -21,6 +22,8 @@ import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.Utils.VolumeConverters;
 import com.example.murica_for_dummies.Volume.VolumeMetricToImperial;
 import com.example.murica_for_dummies.WelcomePage;
+import com.example.murica_for_dummies.database.Users.UsersRepository;
+import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityMassImperialToMetricBinding;
 import com.example.murica_for_dummies.databinding.ActivityVolumeImperialToMetricBinding;
 
@@ -45,7 +48,7 @@ public class VolumeImperialToMetric extends AppCompatActivity {
         binding = ActivityVolumeImperialToMetricBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
-        //repository = UsersRepository.getRepository(getApplication());
+        repository = UsersRepository.getRepository(getApplication());
 
         setContentView(view);
 
@@ -138,8 +141,8 @@ public class VolumeImperialToMetric extends AppCompatActivity {
         ResultText.setText(getString(R.string.VolumeMetricResult,result));
 
         try{
-            History histo = new History(MainActivity.user.getLogin(), "Volume", "L", result);
-            HistoryRepository.getRepository(getApplication(), "historyTable").insertHistory(histo);
+            History historyEntry = new History(LoginActivity.actualUsername, "Volume", "L", result);
+            repository.insertHistory(historyEntry);
         }
         catch(Exception e){
             Toast.makeText(this, "Couldn't save in history : " + e.getMessage(), Toast.LENGTH_SHORT).show();

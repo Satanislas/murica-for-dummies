@@ -23,7 +23,7 @@ import com.example.murica_for_dummies.Utils.GetValue;
 import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.Utils.VolumeConverters;
 import com.example.murica_for_dummies.WelcomePage;
-import com.example.murica_for_dummies.database.History.HistoryRepository;
+import com.example.murica_for_dummies.database.Users.UsersRepository;
 import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityMassMetricToImperialBinding;
 import com.example.murica_for_dummies.databinding.ActivityVolumeMetricToImperialBinding;
@@ -149,7 +149,7 @@ public class DistanceMetricToImperial extends AppCompatActivity {
             History histoPound = new History(MainActivity.user.getLogin(), "Distance", "Feet", resultPound);
             History histoTon = new History(MainActivity.user.getLogin(), "Distance", "Mile", resultTon);
 
-            HistoryRepository repo = HistoryRepository.getRepository(getApplication(), "historyTable");
+            UsersRepository repo = UsersRepository.getRepository(getApplication());
 
             repo.insertHistory(histoOunce);
             repo.insertHistory(histoPound);
