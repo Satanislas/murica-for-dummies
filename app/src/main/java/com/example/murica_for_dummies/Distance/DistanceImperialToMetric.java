@@ -26,6 +26,7 @@ import com.example.murica_for_dummies.Volume.VolumeMetricToImperial;
 import com.example.murica_for_dummies.WelcomePage;
 import com.example.murica_for_dummies.database.Users.UsersRepository;
 import com.example.murica_for_dummies.database.entities.History;
+import com.example.murica_for_dummies.database.entities.Users;
 import com.example.murica_for_dummies.databinding.ActivityDistanceImperialToMetricBinding;
 import com.example.murica_for_dummies.databinding.ActivityMassImperialToMetricBinding;
 import com.example.murica_for_dummies.databinding.ActivityVolumeImperialToMetricBinding;
@@ -42,7 +43,8 @@ public class DistanceImperialToMetric extends AppCompatActivity {
     Button HomeButton;
     Button SwapButton;
 
-    private UsersRepository repository;
+    UsersRepository repository;
+    public static Users user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,9 @@ public class DistanceImperialToMetric extends AppCompatActivity {
         binding = ActivityDistanceImperialToMetricBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
+        repository = UsersRepository.getRepository(getApplication());
         setContentView(view);
+        user = MainActivity.user;
 
         InitAttributes();
 
