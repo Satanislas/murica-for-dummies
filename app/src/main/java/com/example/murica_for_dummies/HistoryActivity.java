@@ -2,6 +2,7 @@ package com.example.murica_for_dummies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +20,9 @@ import com.example.murica_for_dummies.database.Users.UsersRepository;
 import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityHistoryBinding;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
@@ -30,6 +34,8 @@ public class HistoryActivity extends AppCompatActivity {
     UsersRepository usersRepository;
 
     public static final String NothingToShowMessage = "Nothing to show";
+
+    private static ArrayList<String> strList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,23 +74,34 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         //filling the recycler
-        List<String> strList = new ArrayList<>();
+        strList = new ArrayList<>();
         try {
-            List<History> list = usersRepository.getHistoryByUser(LoginActivity.actualUsername);
+            LiveData<List<History>> res = usersRepository.getHistoryByUser(LoginActivity.actualUsername);
 
-            for (History h : list) {
-                strList.add(String.format(h.getUnit1Name() + " --> " + "%d.2" + " " + h.getUnit2Name(), h.getValue()));
-            }
+            res.observe(this, historyList -> {
+                for (History h: historyList) {
+                    strList.add(String.format(h.getUnit1Name() +
+                            " --> " +
+                            "%.2f" +
+                            " " +
+                            h.getUnit2Name(),
+                            h.getValue()));
+                }
+                Collections.reverse(strList);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                MyAdapter adapter = new MyAdapter(strList, getApplicationContext());
+                recyclerView.setAdapter(adapter);
+            });
 
         }catch (Exception e) {
+            System.out.println("ERROR : " + e.getMessage());
             strList = new ArrayList<>();
             strList.add(NothingToShowMessage);
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            MyAdapter adapter = new MyAdapter(strList, this);
+            recyclerView.setAdapter(adapter);
         }
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        MyAdapter adapter = new MyAdapter(strList, this);
-        recyclerView.setAdapter(adapter);
-
     }
 
     public static Intent IntentFactory(Context context){

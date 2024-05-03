@@ -112,8 +112,8 @@ public class UsersRepository {
         void onUsernameExists();
     }
 
-    public List<History> getHistoryByUser(String login) {
-        return getHistoryByUser(login);
+    public LiveData<List<History>> getHistoryByUser(String login) {
+        return historyDAO.getHistoryByUser(login);
     }
 
     public void insertHistory(History history) {

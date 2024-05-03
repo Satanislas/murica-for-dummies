@@ -111,10 +111,12 @@ public class MainActivity extends AppCompatActivity {
         repository.insertUser(testUser1);
 
 
+        /*
         History history = new History("admin1", "unit1", "unit2", 2);
         repository.insertHistory(history);
 
         history = new History("testuser1", "gyat", "suppakippa", 45);
         repository.insertHistory(history);
+         */
     }
 }
