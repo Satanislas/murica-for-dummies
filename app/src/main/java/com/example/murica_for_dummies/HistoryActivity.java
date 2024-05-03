@@ -29,10 +29,11 @@ public class HistoryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     UsersRepository usersRepository;
 
+    public static final String NothingToShowMessage = "Nothing to show";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        super.onCreate(savedInstanceState);;
         setContentView(R.layout.activity_history);
 
         binding = ActivityHistoryBinding.inflate(getLayoutInflater());
@@ -49,7 +50,15 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void ClearHistoryCall() {
-        Toast.makeText(getApplicationContext(),"delete everything... EVERYTHING!",Toast.LENGTH_SHORT).show();
+        List<String> strList = new ArrayList<>();
+
+        strList.add(NothingToShowMessage);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        MyAdapter adapter = new MyAdapter(strList, this);
+        recyclerView.setAdapter(adapter);
+
+        Toast.makeText(getApplicationContext(),"Cleared History",Toast.LENGTH_SHORT).show();
     }
 
     private void InitAttributes() {
@@ -59,14 +68,17 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         //filling the recycler
-        //List<History> list = usersRepository.getHistoryByUser(LoginActivity.actualUsername);
-
         List<String> strList = new ArrayList<>();
-        //for(History h : list){
-            //strList.add(String.format(h.getUnit1Name() + " --> " + "%d.2" + " "  + h.getUnit2Name(),h.getValue() ));
-        //}
-        for (int i = 0; i < 20; i++) {
-            strList.add("caca " + i);
+        try {
+            List<History> list = usersRepository.getHistoryByUser(LoginActivity.actualUsername);
+
+            for (History h : list) {
+                strList.add(String.format(h.getUnit1Name() + " --> " + "%d.2" + " " + h.getUnit2Name(), h.getValue()));
+            }
+
+        }catch (Exception e) {
+            strList = new ArrayList<>();
+            strList.add(NothingToShowMessage);
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
