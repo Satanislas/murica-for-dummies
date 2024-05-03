@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.murica_for_dummies.LoginActivity;
 import com.example.murica_for_dummies.MainActivity;
 import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
@@ -22,6 +23,7 @@ import com.example.murica_for_dummies.WelcomePage;
 import com.example.murica_for_dummies.database.Users.UsersDatabase;
 import com.example.murica_for_dummies.database.Users.UsersRepository;
 import com.example.murica_for_dummies.database.entities.History;
+import com.example.murica_for_dummies.database.entities.Users;
 import com.example.murica_for_dummies.databinding.ActivityMassMetricToImperialBinding;
 
 public class MassMetricToImperial extends AppCompatActivity {
@@ -39,6 +41,9 @@ public class MassMetricToImperial extends AppCompatActivity {
     Button HomeButton;
     Button SwapButton;
 
+    public static Users user;
+    UsersRepository repository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +51,10 @@ public class MassMetricToImperial extends AppCompatActivity {
         binding = ActivityMassMetricToImperialBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
+        repository = UsersRepository.getRepository(getApplication());
+
         setContentView(view);
+        user = MainActivity.user;
 
         InitAttributes();
 
@@ -143,15 +151,13 @@ public class MassMetricToImperial extends AppCompatActivity {
         //adding history to database
 
         try {
-            History histoOunce = new History(MainActivity.user.getLogin(), "Mass", "Ounce", resultOunce);
-            History histoPound = new History(MainActivity.user.getLogin(), "Mass", "Pound", resultPound);
-            History histoTon = new History(MainActivity.user.getLogin(), "Mass", "Ton", resultTon);
+            History histoOunce = new History(LoginActivity.actualUsername, "Mass", "Ounce", resultOunce);
+            History histoPound = new History(LoginActivity.actualUsername, "Mass", "Pound", resultPound);
+            History histoTon = new History(LoginActivity.actualUsername, "Mass", "Ton", resultTon);
 
-        UsersRepository repo = UsersRepository.getRepository(getApplication());
-
-            repo.insertHistory(histoOunce);
-            repo.insertHistory(histoPound);
-            repo.insertHistory(histoTon);
+            repository.insertHistory(histoOunce);
+            repository.insertHistory(histoPound);
+            repository.insertHistory(histoTon);
         }
         catch(Exception e){
             Toast.makeText(this, "Couldn't save history : " + e.getMessage(), Toast.LENGTH_SHORT).show();
