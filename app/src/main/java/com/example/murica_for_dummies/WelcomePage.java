@@ -15,15 +15,23 @@
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.AlertDialog;
     import androidx.appcompat.app.AppCompatActivity;
+    import androidx.lifecycle.LiveData;
+    import androidx.recyclerview.widget.LinearLayoutManager;
 
+    import com.example.murica_for_dummies.Misc.MyAdapter;
     import com.example.murica_for_dummies.Misc.ThemeSelector;
+    import com.example.murica_for_dummies.database.entities.History;
     import com.example.murica_for_dummies.database.entities.Users;
 import com.example.murica_for_dummies.Distance.DistanceImperialToMetric;
 import com.example.murica_for_dummies.Mass.MassImperialToMetric;
 import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
 
+    import java.util.ArrayList;
+    import java.util.Collections;
+    import java.util.List;
 
-public class WelcomePage extends AppCompatActivity {
+
+    public class WelcomePage extends AppCompatActivity {
 
         com.example.murica_for_dummies.databinding.ActivityWelcomePageBinding binding;
 
@@ -46,6 +54,9 @@ public class WelcomePage extends AppCompatActivity {
   
   @Override
         protected void onCreate(Bundle savedInstanceState) {
+
+            LoadTheme();
+
             ThemeSelector.SetTheme(this);
             super.onCreate(savedInstanceState);
 
@@ -88,7 +99,58 @@ public class WelcomePage extends AppCompatActivity {
 
         }
 
-         private void DistanceButtonCall() {
+        private void LoadTheme() {
+            /*
+            try {
+              LiveData<List<Themes>> res = usersRepository.getThemesByUser(LoginActivity.actualUsername);
+
+              //peut etre du INT  selon comment tu as organisé la table
+              ArrayList<String> strList = new ArrayList<>();
+              res.observe(this, list -> {
+                  for (Themes t: list) {
+                      //à adapter selon la fonction qui permet d'avoir soit le nom du string soit l'ID
+                      strList.add(t.getTheme());
+                  }
+
+                  //si c'est vide, le user n'a pas choisi de theme donc on laisse celui de base
+                  if(!strList.isEmpty()) {
+                      //pour avoir le dernier theme choisi en premier
+                      Collections.reverse(strList);
+
+                      //si c'est un string
+                      String CurrentTheme = strList.get(0);
+
+                      switch (CurrentTheme){
+                          case "Default" : ThemeSelector.setCurrentSelectedTheme(R.style.Base_Theme_Murica_for_dummies);
+                            break;
+
+                          case "Pink" : ThemeSelector.setCurrentSelectedTheme(R.style.Pink_Theme_Murica_for_dummies);
+                              break;
+
+                          case "Lime" : ThemeSelector.setCurrentSelectedTheme(R.style.Lime_Theme_Murica_for_dummies);
+                              break;
+
+                          case "OceanBlue" : ThemeSelector.setCurrentSelectedTheme(R.style.Ocean_blue_Theme_Murica_for_dummies);
+                              break;
+
+                          case "Imperial" : ThemeSelector.setCurrentSelectedTheme(R.style.Imperial_Theme_Murica_for_dummies);
+                              break;
+
+                          case "Sunset" : ThemeSelector.setCurrentSelectedTheme(R.style.Sunset_Theme_Murica_for_dummies);
+                              break;
+                      }
+
+                      //si c'est un INT
+                      //ThemeSelector.setCurrentSelectedTheme(strList.get(0));
+                  }
+              });
+
+            }catch (Exception e) {
+            }
+             */
+        }
+
+        private void DistanceButtonCall() {
        startActivity(DistanceImperialToMetric.IntentFactory(getApplicationContext()));
     }
 
