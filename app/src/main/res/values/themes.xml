@@ -2,7 +2,32 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Murica_for_dummies" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- <item name="colorPrimary">#e54e86</item> -->
+    </style>
+
+    <style name="Pink.Theme.Murica_for_dummies" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#e54e86</item>
+    </style>
+
+    <style name="Lime.Theme.Murica_for_dummies" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#00c300</item>
+    </style>
+
+    <style name="Ocean_blue.Theme.Murica_for_dummies" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#1a4480</item>
+    </style>
+
+    <style name="Imperial.Theme.Murica_for_dummies" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#1e2832</item>
+    </style>
+
+    <style name="Sunset.Theme.Murica_for_dummies" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">#ad6110</item>
     </style>
 
     <style name="Theme.Murica_for_dummies" parent="Base.Theme.Murica_for_dummies" />

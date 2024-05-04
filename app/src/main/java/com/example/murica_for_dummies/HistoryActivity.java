@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.murica_for_dummies.Misc.MyAdapter;
+import com.example.murica_for_dummies.Misc.ThemeSelector;
 import com.example.murica_for_dummies.database.Users.UsersRepository;
 import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.databinding.ActivityHistoryBinding;
@@ -39,6 +40,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeSelector.SetTheme(this);
         super.onCreate(savedInstanceState);;
         setContentView(R.layout.activity_history);
 

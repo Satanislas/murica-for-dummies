@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.murica_for_dummies.LoginActivity;
 import com.example.murica_for_dummies.MainActivity;
 import com.example.murica_for_dummies.Mass.MassImperialToMetric;
+import com.example.murica_for_dummies.Misc.ThemeSelector;
 import com.example.murica_for_dummies.R;
 import com.example.murica_for_dummies.Utils.Constants;
 import com.example.murica_for_dummies.Utils.GetValue;
@@ -46,6 +47,7 @@ public class VolumeMetricToImperial extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeSelector.SetTheme(this);
         super.onCreate(savedInstanceState);
 
         binding = ActivityVolumeMetricToImperialBinding.inflate(getLayoutInflater());

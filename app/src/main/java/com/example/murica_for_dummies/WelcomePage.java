@@ -15,6 +15,8 @@
     import androidx.annotation.NonNull;
     import androidx.appcompat.app.AlertDialog;
     import androidx.appcompat.app.AppCompatActivity;
+
+    import com.example.murica_for_dummies.Misc.ThemeSelector;
     import com.example.murica_for_dummies.database.entities.Users;
 import com.example.murica_for_dummies.Distance.DistanceImperialToMetric;
 import com.example.murica_for_dummies.Mass.MassImperialToMetric;
@@ -29,7 +31,7 @@ public class WelcomePage extends AppCompatActivity {
         Button VolumeButton;
         Button DistanceButton;
         Button HistoryButton;
-
+        Button SettingButton;
         static boolean isAdmin = true;
 
         Users user;
@@ -44,6 +46,7 @@ public class WelcomePage extends AppCompatActivity {
   
   @Override
         protected void onCreate(Bundle savedInstanceState) {
+            ThemeSelector.SetTheme(this);
             super.onCreate(savedInstanceState);
 
             binding = com.example.murica_for_dummies.databinding.ActivityWelcomePageBinding.inflate(getLayoutInflater());
@@ -56,6 +59,7 @@ public class WelcomePage extends AppCompatActivity {
             VolumeButton.setOnClickListener(v -> VolumeButtonCall());
             DistanceButton.setOnClickListener(v -> DistanceButtonCall());
             HistoryButton.setOnClickListener(v -> startActivity(HistoryActivity.IntentFactory(getApplicationContext())));
+            SettingButton.setOnClickListener(v -> startActivity(SettingsActivity.IntentFactory(getApplicationContext())));
 
             Button logoutButton = findViewById(R.id.logoutButton);
 
@@ -79,6 +83,9 @@ public class WelcomePage extends AppCompatActivity {
             } else {
                 adminButton.setVisibility(View.GONE);
             }
+
+
+
         }
 
          private void DistanceButtonCall() {
@@ -98,6 +105,7 @@ public class WelcomePage extends AppCompatActivity {
             VolumeButton = binding.VolumeButton;
             DistanceButton = binding.DistanceButton;
             HistoryButton = binding.HistoryButton;
+            SettingButton = binding.SettingButton;
         }
 
         public static Intent IntentFactory(Context context){
