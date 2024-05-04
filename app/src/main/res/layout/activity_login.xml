@@ -74,6 +74,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
+<<<<<<< Updated upstream
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="222dp"
@@ -86,4 +87,6 @@
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
         app:layout_constraintVertical_bias="0.437"
         app:srcCompat="@drawable/logo" />
+=======
+>>>>>>> Stashed changes
 </androidx.constraintlayout.widget.ConstraintLayout>

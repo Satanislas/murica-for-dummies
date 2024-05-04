@@ -12,6 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.murica_for_dummies.database.History.HistoryDAO;
 import com.example.murica_for_dummies.database.Migrations;
 import com.example.murica_for_dummies.database.entities.History;
+import com.example.murica_for_dummies.database.entities.Settings;
 import com.example.murica_for_dummies.database.entities.Users;
 import com.example.murica_for_dummies.database.typeConverters.LocalDateTypeConverter;
 
@@ -19,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {Users.class, History.class}, version = 2, exportSchema = false)
+@Database(entities = {Users.class, History.class, Settings.class}, version = 4, exportSchema = false)
 public abstract class UsersDatabase extends RoomDatabase {
 
     public static final String USERS_TABLE = "usersTable";
@@ -27,6 +28,7 @@ public abstract class UsersDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "Users_database";
 
     private static volatile UsersDatabase INSTANCE;
+
     private static final int NUMBER_OF_THREADS = 4;
 
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
@@ -52,7 +54,7 @@ public abstract class UsersDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             UsersDatabase.class, "my_database")
-                    .addMigrations(Migrations.MIGRATION_1_3)
+                    .addMigrations(Migrations.MIGRATION_1_4)
                     .build();
         }
         return INSTANCE;

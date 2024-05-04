@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Murica_for_dummies">
         <activity
+<<<<<<< Updated upstream
             android:name=".SettingsActivity"
+=======
+            android:name=".AdminPageActivity"
+>>>>>>> Stashed changes
             android:exported="false" />
         <activity
             android:name=".CreateAccount"

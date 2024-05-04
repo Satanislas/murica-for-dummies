@@ -88,7 +88,7 @@ import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
                 adminButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        return;
+                        startActivity(AdminPageActivity.adminPageIntentFactory(getApplicationContext()));
                     }
                 });
             } else {
