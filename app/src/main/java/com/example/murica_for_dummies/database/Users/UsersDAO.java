@@ -19,6 +19,9 @@ public interface UsersDAO {
     @Delete
     void delete(Users users);
 
+    @Query("Delete FROM " + UsersDatabase.USERS_TABLE + " WHERE login == :username")
+    void deleteByUsername(String username);
+
     @Query("Select * from " + UsersDatabase.USERS_TABLE + " ORDER BY login")
     List<Users> getAllRecords();
 

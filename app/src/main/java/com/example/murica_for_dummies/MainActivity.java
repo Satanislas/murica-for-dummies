@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         Users testUser1 = new Users("testuser1", "testuser1", false);
         repository.insertUser(testUser1);
+<<<<<<< Updated upstream
 
 
         /*
@@ -118,5 +119,7 @@ public class MainActivity extends AppCompatActivity {
         history = new History("testuser1", "gyat", "suppakippa", 45);
         repository.insertHistory(history);
          */
+=======
+>>>>>>> Stashed changes
     }
 }

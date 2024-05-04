@@ -25,4 +25,8 @@
     <string name="create_account">MURICA FOR DUMMIES\nCreate your Account</string>
     <string name="create_accountButton">Create Account</string>
     <string name="create_accountSwapPageButton">Create Account</string>
+    <string name="delete_username">Delete Username</string>
+    <string name="username_to_delete">Username To Delete</string>
+    <string name="create_user">Create User</string>
+    <string name="create_admin">Create Admin</string>
 </resources>

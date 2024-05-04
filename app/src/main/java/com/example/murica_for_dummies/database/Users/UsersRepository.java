@@ -73,6 +73,10 @@ public class UsersRepository {
         return usersDAO.getUserByUserName(username);
     }
 
+    public void deleteUserByUsername(String username) {
+        usersDAO.deleteByUsername(username);
+    }
+
     public LiveData<Users> getUserByUserId(int id) {
         return usersDAO.getUserByUserId(id);
     }
