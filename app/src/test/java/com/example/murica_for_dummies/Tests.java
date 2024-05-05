@@ -17,7 +17,6 @@ import com.example.murica_for_dummies.Utils.MassConverters;
 import com.example.murica_for_dummies.Utils.VolumeConverters;
 import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
 import com.example.murica_for_dummies.Volume.VolumeMetricToImperial;
-import com.example.murica_for_dummies.database.entities.History;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.List;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class Tests {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
