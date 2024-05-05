@@ -10,6 +10,8 @@ import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.murica_for_dummies.Misc.ThemeSelector;
+import com.example.murica_for_dummies.database.Users.UsersRepository;
+import com.example.murica_for_dummies.database.entities.Settings;
 import com.example.murica_for_dummies.databinding.ActivitySettingsBinding;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -26,6 +28,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     ActivitySettingsBinding binding;
 
+    private UsersRepository usersRepository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ThemeSelector.SetTheme(this);
@@ -34,6 +38,8 @@ public class SettingsActivity extends AppCompatActivity {
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        usersRepository = UsersRepository.getRepository(getApplication());
 
         InitiateAttributes();
 
@@ -70,6 +76,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         pressedButton.setChecked(true);
         ThemeSelector.setCurrentSelectedTheme(Rid);
+
+        String username = LoginActivity.actualUsername;
+
+        Settings settings = new Settings(username, Rid);
+        usersRepository.insertSettings(settings);
+
+
     }
 
     private void InitiateAttributes() {

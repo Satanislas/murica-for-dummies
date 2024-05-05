@@ -92,8 +92,10 @@ public class AdminPageActivity extends AppCompatActivity {
         if (user == null) {
             toastMaker("User don't exists");
             return;
-        }
-        else {
+        } else if (user.getLogin().equals(LoginActivity.actualUsername)) {
+            toastMaker("Don't try to send yourself to the shadow realm..");
+            return;
+        } else {
             usersRepository.deleteUserByUsername(username);
         }
     }

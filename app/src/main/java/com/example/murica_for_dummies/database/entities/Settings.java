@@ -13,13 +13,11 @@ public class Settings {
 
     private String username;
 
-    private String colorName;
-    private String colorRgb;
+    private int colorId;
 
-    public Settings(String username, String colorName, String colorRgb) {
+    public Settings(String username, int colorId) {
         this.username = username;
-        this.colorName = colorName;
-        this.colorRgb = colorRgb;
+        this.colorId = colorId;
     }
 
     public int getId() {
@@ -30,20 +28,12 @@ public class Settings {
         this.id = id;
     }
 
-    public String getColorName() {
-        return colorName;
+    public int getColorId() {
+        return colorId;
     }
 
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
-    }
-
-    public String getColorRgb() {
-        return colorRgb;
-    }
-
-    public void setColorRgb(String colorRgb) {
-        this.colorRgb = colorRgb;
+    public void setColorId(int colorId) {
+        this.colorId = colorId;
     }
 
     public String getUsername() {
