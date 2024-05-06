@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.murica_for_dummies.Misc.ThemeSelector;
 import com.example.murica_for_dummies.database.Users.UsersDAO;
 import com.example.murica_for_dummies.database.Users.UsersRepository;
 import com.example.murica_for_dummies.database.entities.Users;
@@ -26,6 +27,7 @@ public class AdminPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeSelector.SetTheme(this);
         binding = ActivityAdminPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -48,6 +50,7 @@ public class AdminPageActivity extends AppCompatActivity {
         binding.deleteUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 deleteUser(binding.UsernameDelete.getText().toString());
             }
         });
@@ -91,10 +94,8 @@ public class AdminPageActivity extends AppCompatActivity {
         Users user = usersRepository.getUserByUserName(username).getValue();
         if (user == null) {
             toastMaker("User don't exists");
-            return;
         } else if (user.getLogin().equals(LoginActivity.actualUsername)) {
             toastMaker("Don't try to send yourself to the shadow realm..");
-            return;
         } else {
             usersRepository.deleteUserByUsername(username);
         }

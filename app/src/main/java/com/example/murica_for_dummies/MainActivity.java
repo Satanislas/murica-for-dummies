@@ -104,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void addDefaultUsers() {
         UsersRepository repository = UsersRepository.getRepository(getApplication());
-        repository.deleteAllUsers();
+//        repository.deleteAllUsers();
+
         Users admin = new Users("admin1", "admin1", true);
         repository.insertUser(admin);
 
