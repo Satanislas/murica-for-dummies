@@ -1,9 +1,12 @@
     package com.example.murica_for_dummies;
 
+
+
     import android.content.Context;
     import android.content.DialogInterface;
     import android.content.Intent;
     import android.content.SharedPreferences;
+    import android.content.res.Resources;
     import android.os.Bundle;
     import android.view.Menu;
     import android.view.MenuInflater;
@@ -20,7 +23,9 @@
 
     import com.example.murica_for_dummies.Misc.MyAdapter;
     import com.example.murica_for_dummies.Misc.ThemeSelector;
+    import com.example.murica_for_dummies.database.Users.UsersRepository;
     import com.example.murica_for_dummies.database.entities.History;
+    import com.example.murica_for_dummies.database.entities.Settings;
     import com.example.murica_for_dummies.database.entities.Users;
 import com.example.murica_for_dummies.Distance.DistanceImperialToMetric;
 import com.example.murica_for_dummies.Mass.MassImperialToMetric;
@@ -42,6 +47,9 @@ import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
         Button SettingButton;
         static boolean isAdmin = true;
 
+        static boolean themeLoaded = false;
+        static String userThatLoadedTheme;
+
         Users user;
 
         private static final String MAIN_ACTIVITY_USER_ID = "com.example.murica_for_dummies.MAIN_ACTIVITY_USER_ID";
@@ -51,10 +59,11 @@ import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
 
         public final String SHARED_PREFERENCE_USERID_KEY = "com.example.murica_for_dummies.SHARED_PREFERENCE_USERID_KEY";
 
+        UsersRepository usersRepository;
   
   @Override
         protected void onCreate(Bundle savedInstanceState) {
-
+            usersRepository = UsersRepository.getRepository(getApplication());
             LoadTheme();
 
             ThemeSelector.SetTheme(this);
@@ -63,6 +72,7 @@ import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
             binding = com.example.murica_for_dummies.databinding.ActivityWelcomePageBinding.inflate(getLayoutInflater());
             View view = binding.getRoot();
             setContentView(view);
+
 
             InitAttributes();
 
@@ -100,54 +110,71 @@ import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
         }
 
         private void LoadTheme() {
-            /*
+            if (themeLoaded){
+                if (!userThatLoadedTheme.equals(LoginActivity.actualUsername)) {
+                    ThemeSelector.setCurrentSelectedTheme(0);
+                }
+                return;
+            }
+            ThemeSelector.setCurrentSelectedTheme(0);
+
             try {
-              LiveData<List<Themes>> res = usersRepository.getThemesByUser(LoginActivity.actualUsername);
+              LiveData<List<Settings>> res = usersRepository.getColorIdByUsername(LoginActivity.actualUsername);
+
+
+
 
               //peut etre du INT  selon comment tu as organisé la table
-              ArrayList<String> strList = new ArrayList<>();
               res.observe(this, list -> {
-                  for (Themes t: list) {
-                      //à adapter selon la fonction qui permet d'avoir soit le nom du string soit l'ID
-                      strList.add(t.getTheme());
+
+                  List<Integer> intList = new ArrayList<>();
+                  for(Settings settings : list){
+                      intList.add(settings.getColorId());
                   }
 
                   //si c'est vide, le user n'a pas choisi de theme donc on laisse celui de base
-                  if(!strList.isEmpty()) {
+                  if(!intList.isEmpty()) {
                       //pour avoir le dernier theme choisi en premier
-                      Collections.reverse(strList);
-
-                      //si c'est un string
-                      String CurrentTheme = strList.get(0);
-
-                      switch (CurrentTheme){
-                          case "Default" : ThemeSelector.setCurrentSelectedTheme(R.style.Base_Theme_Murica_for_dummies);
-                            break;
-
-                          case "Pink" : ThemeSelector.setCurrentSelectedTheme(R.style.Pink_Theme_Murica_for_dummies);
-                              break;
-
-                          case "Lime" : ThemeSelector.setCurrentSelectedTheme(R.style.Lime_Theme_Murica_for_dummies);
-                              break;
-
-                          case "OceanBlue" : ThemeSelector.setCurrentSelectedTheme(R.style.Ocean_blue_Theme_Murica_for_dummies);
-                              break;
-
-                          case "Imperial" : ThemeSelector.setCurrentSelectedTheme(R.style.Imperial_Theme_Murica_for_dummies);
-                              break;
-
-                          case "Sunset" : ThemeSelector.setCurrentSelectedTheme(R.style.Sunset_Theme_Murica_for_dummies);
-                              break;
-                      }
+                      Collections.reverse(intList);
 
                       //si c'est un INT
-                      //ThemeSelector.setCurrentSelectedTheme(strList.get(0));
+                      ThemeSelector.setCurrentSelectedTheme(intList.get(0));
+
+                      themeLoaded = true;
+                      userThatLoadedTheme = LoginActivity.actualUsername;
+                      startActivity(IntentFactory(getApplicationContext()));
+
+                      //si c'est un string
+//                      String CurrentTheme = list.get(0);
+//
+//                      switch (CurrentTheme){
+//                          case "Default" : ThemeSelector.setCurrentSelectedTheme(R.style.Base_Theme_Murica_for_dummies);
+//                            break;
+//
+//                          case "Pink" : ThemeSelector.setCurrentSelectedTheme(R.style.Pink_Theme_Murica_for_dummies);
+//                              break;
+//
+//                          case "Lime" : ThemeSelector.setCurrentSelectedTheme(R.style.Lime_Theme_Murica_for_dummies);
+//                              break;
+//
+//                          case "OceanBlue" : ThemeSelector.setCurrentSelectedTheme(R.style.Ocean_blue_Theme_Murica_for_dummies);
+//                              break;
+//
+//                          case "Imperial" : ThemeSelector.setCurrentSelectedTheme(R.style.Imperial_Theme_Murica_for_dummies);
+//                              break;
+//
+//                          case "Sunset" : ThemeSelector.setCurrentSelectedTheme(R.style.Sunset_Theme_Murica_for_dummies);
+//                              break;
+//                      }
                   }
               });
+                res.getValue();
+                System.out.println("A");
 
             }catch (Exception e) {
+
             }
-             */
+
         }
 
         private void DistanceButtonCall() {
@@ -168,6 +195,8 @@ import com.example.murica_for_dummies.Volume.VolumeImperialToMetric;
             DistanceButton = binding.DistanceButton;
             HistoryButton = binding.HistoryButton;
             SettingButton = binding.SettingButton;
+
+            binding.UserConnected.setText("User connected : " + LoginActivity.actualUsername);
         }
 
         public static Intent IntentFactory(Context context){

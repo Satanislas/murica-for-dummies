@@ -11,6 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.murica_for_dummies.database.History.HistoryDAO;
 import com.example.murica_for_dummies.database.Migrations;
+import com.example.murica_for_dummies.database.Settings.SettingsDAO;
 import com.example.murica_for_dummies.database.entities.History;
 import com.example.murica_for_dummies.database.entities.Settings;
 import com.example.murica_for_dummies.database.entities.Users;
@@ -73,9 +74,11 @@ public abstract class UsersDatabase extends RoomDatabase {
                 Users testUser1 = new Users("testuser1", "testuser1", false);
                 dao.insert(testUser1);
 
+
+
                 HistoryDAO daoHisto = INSTANCE.historyDAO();
 
-
+                SettingsDAO daoSettings = INSTANCE.settingsDAO();
             });
         }
     };
@@ -83,6 +86,8 @@ public abstract class UsersDatabase extends RoomDatabase {
     public abstract UsersDAO usersDAO();
 
     public abstract HistoryDAO historyDAO();
+
+    public abstract SettingsDAO settingsDAO();
 }
 
 

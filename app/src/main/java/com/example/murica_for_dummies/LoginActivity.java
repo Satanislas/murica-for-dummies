@@ -30,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
 
         repository = UsersRepository.getRepository(getApplication());
 
+        WelcomePage.themeLoaded = false;
+
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

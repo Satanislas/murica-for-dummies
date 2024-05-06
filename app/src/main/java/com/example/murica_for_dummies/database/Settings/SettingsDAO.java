@@ -10,6 +10,7 @@ import com.example.murica_for_dummies.database.Users.UsersDatabase;
 import com.example.murica_for_dummies.database.entities.Settings;
 
 import java.util.List;
+import java.util.Set;
 
 @Dao
 public interface SettingsDAO {
@@ -20,9 +21,12 @@ public interface SettingsDAO {
     @Query("DELETE from settingsTable")
     void deleteAll();
 
-    @Query("UPDATE settingsTable SET colorRgb = :newColorRgb WHERE colorName = :colorName")
-    void updateColor(String colorName, String newColorRgb);
+    @Query("UPDATE settingsTable SET colorId = :colorId WHERE username = :username")
+    void updateColorByUsername(String username, int colorId);
 
-    @Query("SELECT colorRgb FROM settingsTable WHERE colorName = :colorName")
-    String showColorRGB(String colorName);
+    @Query("SELECT * FROM settingsTable WHERE username = :username")
+    LiveData<List<Settings>> showColorRGBByUsername(String username);
+
+    @Query("SELECT * FROM settingsTable WHERE username = :username")
+    Settings showSettingsByUsername(String username);
 }

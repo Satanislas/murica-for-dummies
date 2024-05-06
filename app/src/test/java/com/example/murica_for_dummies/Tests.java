@@ -33,21 +33,21 @@ public class Tests {
     }
 
     @Test
-    public void ConverterTestMass(){
+    public void ConverterMass(){
         double kg = 1;
         assertEquals(kg, MassConverters.poundToKilograms(MassConverters.kilogramToPounds(kg)),0.01);
         assertNotEquals(kg,MassConverters.kilogramToPounds(kg));
     }
 
     @Test
-    public void ConverterTestVolume(){
+    public void ConverterVolume(){
         double L = 1;
         assertEquals(L, VolumeConverters.gillToLiters(VolumeConverters.litersToGill(L)),0.01);
         assertNotEquals(L,VolumeConverters.litersToGill(L));
     }
 
     @Test
-    public void ConverterTestDistance(){
+    public void ConverterDistance(){
         double m = 1000;
         assertEquals(m, DistanceConverters.milesToMeter(DistanceConverters.meterToMiles(m)),0.01);
         assertNotEquals(m,DistanceConverters.meterToMiles(m));

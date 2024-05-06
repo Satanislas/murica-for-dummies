@@ -5,7 +5,9 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.murica_for_dummies.database.History.HistoryDAO;
+import com.example.murica_for_dummies.database.Settings.SettingsDAO;
 import com.example.murica_for_dummies.database.entities.History;
+import com.example.murica_for_dummies.database.entities.Settings;
 import com.example.murica_for_dummies.database.entities.Users;
 
 import java.util.List;
@@ -17,12 +19,14 @@ public class UsersRepository {
     private static UsersRepository instance;
     private UsersDAO usersDAO;
     private HistoryDAO historyDAO;
+    private SettingsDAO settingsDAO;
     private List<Users> allLogs;
 
     private UsersRepository(Application application) {
         UsersDatabase db = UsersDatabase.getDatabase(application);
         this.usersDAO = db.usersDAO();
         this.historyDAO = db.historyDAO();
+        this.settingsDAO = db.settingsDAO();
         this.allLogs = (List<Users>) this.usersDAO.getAllRecords();
     }
 
@@ -124,5 +128,24 @@ public class UsersRepository {
         UsersDatabase.databaseWriteExecutor.execute(() -> {
             historyDAO.insertHistory(history);
         });
+    }
+
+    public void insertSettings(Settings settings) {
+        UsersDatabase.databaseWriteExecutor.execute(() -> {
+            settingsDAO.insertSettings(settings);
+        });
+    }
+
+    public void updateColorIdByUsername(String username, int colorId){
+        settingsDAO.updateColorByUsername(username, colorId);
+    }
+
+    public LiveData<List<Settings>> getColorIdByUsername(String username){
+        return settingsDAO.showColorRGBByUsername(username);
+    }
+
+    public Settings showSettingsByUsername(String username)
+    {
+        return settingsDAO.showSettingsByUsername(username);
     }
 }

@@ -15,7 +15,6 @@ public class ThemeSelector {
 
     public static void setCurrentSelectedTheme(int id){
         currentSelectedTheme = id;
-        //DATABASE
     }
 
     public static void SetTheme(Context context){
